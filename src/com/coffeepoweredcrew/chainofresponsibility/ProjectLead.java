@@ -1,0 +1,30 @@
+package com.coffeepoweredcrew.chainofresponsibility;
+
+//A concrete handler
+public class ProjectLead extends Employee{
+
+	public ProjectLead(LeaveApprover successor)
+	{
+		super("Project Lead",successor);
+	}
+
+	@Override
+	protected boolean processRequest(LeaveApplication application) {
+		// TODO Auto-generated method stub
+		
+		if (application.getType() == LeaveApplication.Type.Sick)
+		{
+			if (application.getNoOfDays() <= 2)
+			{
+				application.approve(getApproverRole());
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	
+	
+	
+}
